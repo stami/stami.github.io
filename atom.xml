@@ -17,8 +17,8 @@
   
   <entry>
     <title>Home Sensors</title>
-    <link href="https://stami.github.io/2017/02/12/home-sensors/"/>
-    <id>https://stami.github.io/2017/02/12/home-sensors/</id>
+    <link href="https://stami.github.io/archives/home-sensors/"/>
+    <id>https://stami.github.io/archives/home-sensors/</id>
     <published>2017-02-11T22:00:00.000Z</published>
     <updated>2017-07-03T14:47:27.000Z</updated>
     
@@ -82,8 +82,8 @@
   
   <entry>
     <title>Location - A Sports Tracking App</title>
-    <link href="https://stami.github.io/2016/05/14/location/"/>
-    <id>https://stami.github.io/2016/05/14/location/</id>
+    <link href="https://stami.github.io/archives/location/"/>
+    <id>https://stami.github.io/archives/location/</id>
     <published>2016-05-13T21:00:00.000Z</published>
     <updated>2017-07-03T14:47:27.000Z</updated>
     
@@ -110,8 +110,8 @@
   
   <entry>
     <title>3D printed bearing for coffee grinder</title>
-    <link href="https://stami.github.io/2016/03/17/3d-printed-bearing-for-coffee-grinder/"/>
-    <id>https://stami.github.io/2016/03/17/3d-printed-bearing-for-coffee-grinder/</id>
+    <link href="https://stami.github.io/archives/3d-printed-bearing-for-coffee-grinder/"/>
+    <id>https://stami.github.io/archives/3d-printed-bearing-for-coffee-grinder/</id>
     <published>2016-03-17T15:02:57.000Z</published>
     <updated>2017-07-03T14:56:42.000Z</updated>
     
@@ -146,8 +146,8 @@
   
   <entry>
     <title>AVR-MT128 development with macOS</title>
-    <link href="https://stami.github.io/2016/03/09/avr-mt-128-macos/"/>
-    <id>https://stami.github.io/2016/03/09/avr-mt-128-macos/</id>
+    <link href="https://stami.github.io/archives/avr-mt-128-macos/"/>
+    <id>https://stami.github.io/archives/avr-mt-128-macos/</id>
     <published>2016-03-08T22:00:00.000Z</published>
     <updated>2017-07-03T14:47:27.000Z</updated>
     
@@ -182,14 +182,14 @@
   
   <entry>
     <title>Remote controlled car</title>
-    <link href="https://stami.github.io/2016/01/28/ble-car/"/>
-    <id>https://stami.github.io/2016/01/28/ble-car/</id>
+    <link href="https://stami.github.io/archives/ble-car/"/>
+    <id>https://stami.github.io/archives/ble-car/</id>
     <published>2016-01-27T22:00:00.000Z</published>
-    <updated>2017-07-03T14:47:27.000Z</updated>
+    <updated>2017-07-03T15:01:29.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="ble-car-featured.jpg" alt="Picture of the project"></p>
 <p><strong>I made this project during christmas break from school. The goal was to test my Arduino components, try something new with iOS and build something amazing.</strong></p>
-<p><em>You can get all the code and Fritzing scetch from the <a href="https://bitbucket.org/samulitamminen/blerduino/src" target="_blank" rel="external">git repository</a>.</em></p>
+<p><em>You can get all the code and Fritzing scetch from the <a href="https://github.com/stami/BLErduino" target="_blank" rel="external">git repository</a>.</em></p>
 <h2 id="Used-Components"><a href="#Used-Components" class="headerlink" title="Used Components"></a>Used Components</h2><ul>
 <li>Arduino Mega 2560</li>
 <li>HM-10 Bluetooth LE chip</li>
