@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://stami.github.io/"/>
-  <updated>2017-07-03T14:19:48.000Z</updated>
+  <updated>2017-07-03T14:47:27.000Z</updated>
   <id>https://stami.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://stami.github.io/2017/07/03/3d-printed-bearing-for-coffee-grinder/"/>
     <id>https://stami.github.io/2017/07/03/3d-printed-bearing-for-coffee-grinder/</id>
     <published>2017-07-03T14:02:57.000Z</published>
-    <updated>2017-07-03T14:19:48.000Z</updated>
+    <updated>2017-07-03T14:47:27.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="3d-feature.jpg" alt="Printed bearings"></p>
 <p>I am a coffee person. I enjoy good coffee and I do things for it. Today I 3D printed a bearing for my coffee grinder Hario Skerton in order to produce more consistent grind.</p>
@@ -56,7 +56,7 @@
     <link href="https://stami.github.io/2017/02/12/home-sensors/"/>
     <id>https://stami.github.io/2017/02/12/home-sensors/</id>
     <published>2017-02-11T22:00:00.000Z</published>
-    <updated>2017-07-03T14:13:59.000Z</updated>
+    <updated>2017-07-03T14:47:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>I’ve been recently inspired to do some IoT stuff, more specifically, make an automated system to collect data and visualize it.</p>
 <p>For example, I have a standing desk at my job and it would be interesting to see how the working hours is divided between standing and sitting modes.</p>
@@ -121,7 +121,7 @@
     <link href="https://stami.github.io/2016/05/14/location/"/>
     <id>https://stami.github.io/2016/05/14/location/</id>
     <published>2016-05-13T21:00:00.000Z</published>
-    <updated>2017-07-03T14:14:06.000Z</updated>
+    <updated>2017-07-03T14:47:27.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="location-screenshots.png" alt="Screenshots from the app"></p>
 <p>I had a mobile development course at my school Tampere University of Applied Sciences and I decided to build a <a href="http://www.sports-tracker.com/" target="_blank" rel="external">Sports Tracker</a> clone.</p>
@@ -149,7 +149,7 @@
     <link href="https://stami.github.io/2016/03/09/avr-mt-128-macos/"/>
     <id>https://stami.github.io/2016/03/09/avr-mt-128-macos/</id>
     <published>2016-03-08T22:00:00.000Z</published>
-    <updated>2017-07-03T14:12:09.000Z</updated>
+    <updated>2017-07-03T14:47:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>I borrowed Olimex board from school for hacking and learning purposes. It wasn’t too hard to get it working with my MacBook Pro.</p>
 <p>Used board: <a href="https://www.olimex.com/Products/AVR/Development/AVR-MT128/" target="_blank" rel="external">Olimex AVR-MT128</a> and programmer: <a href="https://www.olimex.com/Products/AVR/Programmers/AVR-JTAG-USB-A/" target="_blank" rel="external">Olimex AVR-JTAG-USB</a></p>
@@ -185,7 +185,7 @@
     <link href="https://stami.github.io/2016/01/28/ble-car/"/>
     <id>https://stami.github.io/2016/01/28/ble-car/</id>
     <published>2016-01-27T22:00:00.000Z</published>
-    <updated>2017-07-03T14:13:50.000Z</updated>
+    <updated>2017-07-03T14:47:27.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="ble-car-featured.jpg" alt="Picture of the project"></p>
 <p><strong>I made this project during christmas break from school. The goal was to test my Arduino components, try something new with iOS and build something amazing.</strong></p>
