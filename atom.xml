@@ -16,42 +16,6 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>3D printed bearing for coffee grinder</title>
-    <link href="https://stami.github.io/2017/07/03/3d-printed-bearing-for-coffee-grinder/"/>
-    <id>https://stami.github.io/2017/07/03/3d-printed-bearing-for-coffee-grinder/</id>
-    <published>2017-07-03T14:02:57.000Z</published>
-    <updated>2017-07-03T14:47:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="3d-feature.jpg" alt="Printed bearings"></p>
-<p>I am a coffee person. I enjoy good coffee and I do things for it. Today I 3D printed a bearing for my coffee grinder Hario Skerton in order to produce more consistent grind.</p>
-<p>I have access to my school’s printer (MakerFarm 6” Prusa i3). I had printed once before this. I used <a href="http://www.repetier.com" target="_blank" rel="external">Repetier Host</a> with <a href="http://slic3r.org" target="_blank" rel="external">Slic3r</a>.</p>
-<p>The model I got from <a href="https://www.reddit.com/r/Coffee/comments/2s016o/got_tired_of_my_harios_inconsistent_grind_so_i_3d/" target="_blank" rel="external">this Reddit thread</a>. There is STL and Solidworks files available. I had to fix the STL file with Slic3r (it was non-manifold) before Repetier Host accepted it.</p>
-<p>First print was not good. The walls were very coarse and ugly. I stopped printing and sliced again with smaller extrusion multiplier (from 1.2 to 1.05) and lower extrusion temperature (205 -&gt; 200 °C). The result was much better, though the walls were melting and falling inwards.</p>
-<p>The third one I got right. I increased layer height to 0.4 mm and the result was good.</p>
-<p><img src="3d-lineup.jpg" alt="Printed bearings"><br><em>First print on the left</em></p>
-<p>At first the bearing was a bit too tight when installed on place. After a little sanding, the fit was perfect.</p>
-<p><img src="3d-result.jpg" alt="The bearing installed"><br><em>The bearing installed</em></p>
-<blockquote>
-<p>So, how is the grind?</p>
-</blockquote>
-<p>I haven’t done any actual comparing tests but there is notably less wobble in the grinder. I was happy with the grind without the bearing, I just thought this was a cool project to do! :)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;3d-feature.jpg&quot; alt=&quot;Printed bearings&quot;&gt;&lt;/p&gt;
-&lt;p&gt;I am a coffee person. I enjoy good coffee and I do things for it. Today I 3D pri
-    
-    </summary>
-    
-    
-      <category term="diy" scheme="https://stami.github.io/tags/diy/"/>
-    
-      <category term="coffee" scheme="https://stami.github.io/tags/coffee/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Home Sensors</title>
     <link href="https://stami.github.io/2017/02/12/home-sensors/"/>
     <id>https://stami.github.io/2017/02/12/home-sensors/</id>
@@ -141,6 +105,42 @@
     
     
       <category term="ios" scheme="https://stami.github.io/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3D printed bearing for coffee grinder</title>
+    <link href="https://stami.github.io/2016/03/17/3d-printed-bearing-for-coffee-grinder/"/>
+    <id>https://stami.github.io/2016/03/17/3d-printed-bearing-for-coffee-grinder/</id>
+    <published>2016-03-17T15:02:57.000Z</published>
+    <updated>2017-07-03T14:56:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="3d-feature.jpg" alt="Printed bearings"></p>
+<p>I am a coffee person. I enjoy good coffee and I do things for it. Today I 3D printed a bearing for my coffee grinder Hario Skerton in order to produce more consistent grind.</p>
+<p>I have access to my school’s printer (MakerFarm 6” Prusa i3). I had printed once before this. I used <a href="http://www.repetier.com" target="_blank" rel="external">Repetier Host</a> with <a href="http://slic3r.org" target="_blank" rel="external">Slic3r</a>.</p>
+<p>The model I got from <a href="https://www.reddit.com/r/Coffee/comments/2s016o/got_tired_of_my_harios_inconsistent_grind_so_i_3d/" target="_blank" rel="external">this Reddit thread</a>. There is STL and Solidworks files available. I had to fix the STL file with Slic3r (it was non-manifold) before Repetier Host accepted it.</p>
+<p>First print was not good. The walls were very coarse and ugly. I stopped printing and sliced again with smaller extrusion multiplier (from 1.2 to 1.05) and lower extrusion temperature (205 -&gt; 200 °C). The result was much better, though the walls were melting and falling inwards.</p>
+<p>The third one I got right. I increased layer height to 0.4 mm and the result was good.</p>
+<p><img src="3d-lineup.jpg" alt="Printed bearings"><br><em>First print on the left</em></p>
+<p>At first the bearing was a bit too tight when installed on place. After a little sanding, the fit was perfect.</p>
+<p><img src="3d-result.jpg" alt="The bearing installed"><br><em>The bearing installed</em></p>
+<blockquote>
+<p>So, how is the grind?</p>
+</blockquote>
+<p>I haven’t done any actual comparing tests but there is notably less wobble in the grinder. I was happy with the grind without the bearing, I just thought this was a cool project to do! :)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;3d-feature.jpg&quot; alt=&quot;Printed bearings&quot;&gt;&lt;/p&gt;
+&lt;p&gt;I am a coffee person. I enjoy good coffee and I do things for it. Today I 3D pri
+    
+    </summary>
+    
+    
+      <category term="diy" scheme="https://stami.github.io/tags/diy/"/>
+    
+      <category term="coffee" scheme="https://stami.github.io/tags/coffee/"/>
     
   </entry>
   
