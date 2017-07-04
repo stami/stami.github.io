@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://stami.github.io/"/>
-  <updated>2017-07-03T14:47:27.000Z</updated>
+  <updated>2017-07-04T08:19:09.000Z</updated>
   <id>https://stami.github.io/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Experiementing with UIKit animations</title>
+    <link href="https://stami.github.io/archives/card-demo/"/>
+    <id>https://stami.github.io/archives/card-demo/</id>
+    <published>2017-07-04T07:42:57.000Z</published>
+    <updated>2017-07-04T08:19:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>I’ve been watching WWCD 2017 videos lately and experiementing with the stuff. <a href="https://developer.apple.com/videos/play/wwdc2017/230/" target="_blank" rel="external">Session 230 - Advanced Animations with UIKit</a> was really interesting and I decided to play with the example they showed in the end of the session.</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p><a href="https://github.com/stami/CardDemo" target="_blank" rel="external">See the code on Github.</a></p>
+<p><img src="card-demo.gif" alt="Gif of the result"></p>
+<h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>I created <code>CardViewController</code> with it’s own <code>.xib</code> file for UI. I exposed the title bar and arrow symbol as <code>IBOutlet</code>s so that I had access to them in my main <code>ViewController</code>.</p>
+<p>The animation logic is in the main <code>ViewController</code>.</p>
+<p>Here I instantinate the card and add it as a child ViewController to the main ViewController. After that the CardViewController’s view has to be added as subview.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cardViewController = <span class="type">CardViewController</span>(nibName: <span class="string">"CardViewController"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"> </div><div class="line">addChildViewController(cardViewController)</div><div class="line">view.addSubview(cardViewController.view)</div><div class="line"> </div><div class="line"><span class="keyword">let</span> cardFrame = <span class="type">CGRect</span>(x: <span class="number">0</span>,</div><div class="line">                        y: view.frame.height - cardTitleHeight,</div><div class="line">                        width: view.bounds.width,</div><div class="line">                        height: cardHeight)</div><div class="line"> </div><div class="line">cardViewController.view.frame = cardFrame</div></pre></td></tr></table></figure>
+<p>I created animation coordination logic like in the session. <strong>Note that I added a completion block</strong> to clear running animations after finishing the animation. It was <em>just assumed</em> in the session example. :)</p>
+<p>Here is the frame animation part.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Perform all animations with animators if not already running</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">animateTransitionIfNeeded</span><span class="params">(state: CardState, duration: TimeInterval)</span></span> &#123;</div><div class="line">  <span class="keyword">if</span> runningAnimations.isEmpty &#123;</div><div class="line"> </div><div class="line">    <span class="keyword">let</span> frameAnimator = <span class="type">UIViewPropertyAnimator</span>(duration: duration, dampingRatio: <span class="number">1</span>) &#123;</div><div class="line">      <span class="keyword">switch</span> state &#123;</div><div class="line">      <span class="keyword">case</span> .expanded:</div><div class="line">        <span class="keyword">self</span>.cardViewController.view.frame.origin.y = <span class="keyword">self</span>.view.frame.height - <span class="keyword">self</span>.cardHeight</div><div class="line">      <span class="keyword">case</span> .collapsed:</div><div class="line">        <span class="keyword">self</span>.cardViewController.view.frame.origin.y = <span class="keyword">self</span>.view.frame.height - <span class="keyword">self</span>.cardTitleHeight</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="comment">// Clear animations when completed</span></div><div class="line">    frameAnimator.addCompletion &#123; <span class="number">_</span> <span class="keyword">in</span></div><div class="line">      <span class="keyword">self</span>.cardIsVisible = !<span class="keyword">self</span>.cardIsVisible</div><div class="line">      <span class="keyword">self</span>.runningAnimations.removeAll()</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    frameAnimator.startAnimation()</div><div class="line">    runningAnimations.append(frameAnimator)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>That together with tap gesture recognizer does the work for handling taps. Here’s how I set the gesture recognizer:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> tapGestureRecognizer = <span class="type">UITapGestureRecognizer</span>(target: <span class="keyword">self</span>,</div><div class="line">                                                  action: #selector(<span class="type">ViewController</span>.handleCardTap))</div><div class="line">cardViewController.titleBar.addGestureRecognizer(tapGestureRecognizer)</div></pre></td></tr></table></figure>
+<p>And here’s the tap handler:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@objc</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleCardTap</span><span class="params">(recognizer: UITapGestureRecognizer)</span></span> &#123;</div><div class="line">  <span class="keyword">switch</span> recognizer.state &#123;</div><div class="line">  <span class="keyword">case</span> .ended:</div><div class="line">    animateTransitionIfNeeded(state: nextState, duration: <span class="number">0.3</span>)</div><div class="line">    <span class="keyword">break</span></div><div class="line">  <span class="keyword">default</span>: <span class="keyword">break</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>I’m just calling the <code>animateTransitionIfNeeded</code> function.</p>
+<p><strong>How about pan handler?</strong></p>
+<p>I’ll just throw the code for you. After the pan gesture has began, I’ll start the animations and pause them instantly. That way they won’t complete on their own but will follow the finger.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Called on pan .began</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">startInteractiveTransition</span><span class="params">(state: CardState, duration: TimeInterval)</span></span> &#123;</div><div class="line">  <span class="keyword">if</span> runningAnimations.isEmpty &#123;</div><div class="line">    animateTransitionIfNeeded(state: state, duration: duration)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span> animator <span class="keyword">in</span> runningAnimations &#123;</div><div class="line">    animator.pauseAnimation()</div><div class="line">    animationProgressWhenInterrupted = animator.fractionComplete</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">// Called on pan .changed</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">updateInteractiveTransition</span><span class="params">(fractionComplete: CGFloat)</span></span> &#123;</div><div class="line">  <span class="keyword">for</span> animator <span class="keyword">in</span> runningAnimations &#123;</div><div class="line">    animator.fractionComplete = fractionComplete + animationProgressWhenInterrupted</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">// Called on pan .ended</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">continueInteractiveTransition</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">for</span> animator <span class="keyword">in</span> runningAnimations &#123;</div><div class="line">    animator.continueAnimation(withTimingParameters: <span class="literal">nil</span>, durationFactor: <span class="number">0</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Here’s the pand handler which calls those functions:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@objc</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleCardPan</span><span class="params">(recognizer: UIPanGestureRecognizer)</span></span> &#123;</div><div class="line">  <span class="keyword">switch</span> recognizer.state &#123;</div><div class="line"> </div><div class="line">  <span class="keyword">case</span> .began:</div><div class="line">    startInteractiveTransition(state: nextState, duration: <span class="number">0.3</span>)</div><div class="line"> </div><div class="line">  <span class="keyword">case</span> .changed:</div><div class="line">    <span class="keyword">let</span> translation = recognizer.translation(<span class="keyword">in</span>: <span class="keyword">self</span>.cardViewController.titleBar)</div><div class="line">    <span class="keyword">var</span> fractionComplete = translation.y / (cardHeight - cardTitleHeight)</div><div class="line">    fractionComplete = cardIsVisible ? fractionComplete : -fractionComplete</div><div class="line">    updateInteractiveTransition(fractionComplete: fractionComplete)</div><div class="line"> </div><div class="line">  <span class="keyword">case</span> .ended:</div><div class="line">    continueInteractiveTransition()</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">    <span class="keyword">break</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Maybe the most interesting part there is the <code>.changed</code> case. There I get the finger movement related to the card title and map that to the length of card’s expected movement when it expands.</p>
+<p><a href="https://github.com/stami/CardDemo" target="_blank" rel="external">See the whole code on Github.</a> </p>
+<p>Thanks for reading!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’ve been watching WWCD 2017 videos lately and experiementing with the stuff. &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2017/2
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="https://stami.github.io/tags/ios/"/>
+    
+  </entry>
   
   <entry>
     <title>Home Sensors</title>
@@ -85,7 +128,7 @@
     <link href="https://stami.github.io/archives/location/"/>
     <id>https://stami.github.io/archives/location/</id>
     <published>2016-05-13T21:00:00.000Z</published>
-    <updated>2017-07-03T14:47:27.000Z</updated>
+    <updated>2017-07-03T14:56:59.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="location-screenshots.png" alt="Screenshots from the app"></p>
 <p>I had a mobile development course at my school Tampere University of Applied Sciences and I decided to build a <a href="http://www.sports-tracker.com/" target="_blank" rel="external">Sports Tracker</a> clone.</p>
@@ -235,11 +278,11 @@
     </summary>
     
     
+      <category term="ios" scheme="https://stami.github.io/tags/ios/"/>
+    
       <category term="embedded" scheme="https://stami.github.io/tags/embedded/"/>
     
       <category term="ble" scheme="https://stami.github.io/tags/ble/"/>
-    
-      <category term="ios" scheme="https://stami.github.io/tags/ios/"/>
     
   </entry>
   
