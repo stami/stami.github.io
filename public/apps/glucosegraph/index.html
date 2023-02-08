@@ -29,21 +29,29 @@
       </nav>
     </header>
 
-    <main class="container max-w-screen-md mx-auto p-5">
+    <main class="container max-w-screen-md mx-auto p-5 flex flex-col">
       <header class="flex flex-col items-center text-center">
-        <img src="appicon.png" />
+        <img width="150" height="150" src="appicon.png" />
 
         <h1 class="text-5xl font-bold">Glucose Graph</h1>
 
         <p class="my-4">Your blood glucose right on the menu bar.</p>
       </header>
 
+      <a
+        href="https://testflight.apple.com/join/2o8u3O2O"
+        class="self-center text-xl p-2 text-slate-600 hover:text-slate-500 border-4 border-slate-500 hover:border-slate-400"
+        target="_blank"
+        >Early access from Testflight</a
+      >
+
       <img
-        src="mockup.webp"
+        class="my-4"
+        src="screenshot.webp"
         alt="Mockup of a MacBook Air running Glucose Graph"
       />
 
-      <p class="my-4">
+      <p class="mb-4">
         A simple app to keep on track of your sugars. It connects to your
         <a
           class="text-slate-600 hover:text-slate-500 border-b-4 border-slate-500 hover:border-slate-400"
@@ -54,16 +62,10 @@
         server and shows the latest value on the menu bar. You can see the
         recent history from the graph.
       </p>
-    </main>
-    <footer class="container mx-auto p-5 text-center">
-      <p class="text-sm">
-        Device Mockup created from
-        <a
-          class="underline"
-          href="https://deviceframes.com/templates/macbook-air"
-          >MacBook Air mockups</a
-        >
+
+      <p class="mb-4">
+        My playground for learning some SwiftUI and macOS development.
       </p>
-    </footer>
+    </main>
   </body>
 </html>
