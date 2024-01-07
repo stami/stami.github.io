@@ -4,9 +4,9 @@ layout: layouts/home.njk
 ---
 <h1>Tags</h1>
 
-<ul>
+<div class="flex flex-row gap-4 py-4 flex-wrap">
 {% for tag in collections.all | getAllTags | filterTagList %}
 	{% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a></li>
+	<a href="{{ tagUrl }}" class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-slate-100 py-2 px-4 font-sans text-xl font-bold text-slate-600 hover:shadow-lg">{{ tag }}</a>
 {% endfor %}
-</ul>
+</div>

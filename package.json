@@ -4,7 +4,7 @@
     "build:11ty": "npx @11ty/eleventy",
     "dev:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --watch --postcss",
     "dev:11ty": "npx @11ty/eleventy --serve --quiet",
-    "start": "yarn clean && yarn dev:11ty",
+    "start": "yarn clean && concurrently \"yarn dev:11ty\" \"yarn dev:css\"",
     "clean": "rm -rf _site public/css/tailwind.css"
   },
   "devDependencies": {
@@ -15,6 +15,7 @@
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "autoprefixer": "^10.4.16",
+    "concurrently": "^5.3.0",
     "luxon": "^3.3.0",
     "markdown-it-anchor": "^8.6.7",
     "postcss": "^8.4.33",

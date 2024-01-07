@@ -47,9 +47,11 @@
   }
 
   blockquote {
-    @apply p-4 my-4 border-s-4 border-slate-300 bg-slate-50 dark:border-slate-500 dark:bg-gray-800;
-    p {
-      @apply my-2;
-    }
+    padding-top: 1px;
+    padding-bottom: 1px;
+    @apply px-4 my-4 border-s-4 border-slate-300 bg-slate-50 dark:border-slate-500 dark:bg-gray-800;
+    /* p { */
+    /* @apply my-1; */
+    /* } */
   }
 }
