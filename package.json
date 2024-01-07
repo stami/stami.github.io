@@ -1,13 +1,22 @@
 {
-  "name": "oaken",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "name": "oaken-11ty",
   "scripts": {
-    "start": "npx tailwindcss -i ./input.css -o ./public/output.css --watch",
-    "build": "npx tailwindcss -i ./input.css -o ./public/output.css --minify"
+    "build": "npx @11ty/eleventy",
+    "build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+    "start": "yarn clean && npx @11ty/eleventy --serve --quiet",
+    "clean": "rm -rf _site"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "devDependencies": {
-    "tailwindcss": "^3.2.4"
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-img": "^3.1.1",
+    "@11ty/eleventy-navigation": "^0.3.5",
+    "@11ty/eleventy-plugin-bundle": "^1.0.4",
+    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "luxon": "^3.3.0",
+    "markdown-it-anchor": "^8.6.7"
   }
 }
