@@ -6,6 +6,8 @@ tags: diy
 
 ![Printed bearings](3d-feature.jpg)
 
+**Update:** Hello from 2024! After 7 years the original post has been removed from Reddit. [You can download my fixed STL file here](/downloads/hario-lower-bearing.stl). My Hario Skerton has not been in daily use for some time now, but the printed bearing has hold up well.
+
 I am a coffee person. I enjoy good coffee and I do things for it. Today I 3D printed a bearing for my coffee grinder Hario Skerton in order to produce more consistent grind.
 
 I have access to my school's printer (MakerFarm 6" Prusa i3). I had printed once before this. I used [Repetier Host](http://www.repetier.com) with [Slic3r](http://slic3r.org).

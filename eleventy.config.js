@@ -17,6 +17,7 @@ module.exports = function (eleventyConfig) {
     "./public/css/index.css": "/css/index.css",
     "./public/css/tailwind.css": "/css/tailwind.css",
     "./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
+    "./public/downloads/": "/downloads/",
   });
 
   // Run Eleventy when these files change:
