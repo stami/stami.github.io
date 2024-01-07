@@ -29,7 +29,7 @@
 			<nav class="container max-w-screen-md mx-auto p-5 align-text-bottom flex flex-col sm:flex-row gap-2 sm:items-end">
 			  <a href="/" class="text-4xl mr-2 font-bold text-slate-600 hover:text-slate-500">{{ metadata.title }}</a>
 
-        <div class="flex flex-row flex-wrap gap-2">
+        <div class="flex flex-row flex-wrap gap-4">
 				{%- for entry in collections.all | eleventyNavigation %}
 					<a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %} class="text-xl font-bold text-slate-600 hover:text-slate-500 hover:underline decoration-4 decoration-slate-500 {% if entry.url == page.url %}underline{% endif %}">
             {{ entry.title }}

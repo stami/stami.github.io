@@ -15,7 +15,7 @@
     }
 
     a {
-      @apply text-slate-600 hover:text-slate-400 underline decoration-4 decoration-slate-400 hover:decoration-slate-300;
+      @apply text-slate-600 hover:text-slate-400 underline underline-offset-4 decoration-4 decoration-slate-400 hover:decoration-slate-300;
     }
   }
 
@@ -37,21 +37,22 @@
     @apply text-4xl font-bold;
   }
   h2 {
-    @apply text-2xl font-bold;
+    @apply text-3xl font-bold;
   }
   h3 {
-    @apply text-xl font-bold;
+    @apply text-2xl font-bold;
   }
   h4 {
-    @apply text-lg font-bold;
+    @apply text-xl font-bold;
   }
 
   blockquote {
     padding-top: 1px;
     padding-bottom: 1px;
     @apply px-4 my-4 border-s-4 border-slate-300 bg-slate-50 dark:border-slate-500 dark:bg-gray-800;
-    /* p { */
-    /* @apply my-1; */
-    /* } */
+  }
+
+  hr {
+    @apply border-t-4 my-8 border-slate-300;
   }
 }
