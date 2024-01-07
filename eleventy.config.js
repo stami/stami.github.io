@@ -14,7 +14,8 @@ module.exports = function (eleventyConfig) {
   // Copy the contents of the `public` folder to the output folder
   // For example, `./public/css/` ends up in `_site/css/`
   eleventyConfig.addPassthroughCopy({
-    "./public/": "/",
+    "./public/css/index.css": "/css/index.css",
+    "./public/css/tailwind.css": "/css/tailwind.css",
     "./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
   });
 
@@ -22,6 +23,7 @@ module.exports = function (eleventyConfig) {
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
   // Watch content images for the image pipeline.
+  eleventyConfig.addWatchTarget("public/css/tailwind.css");
   eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
   eleventyConfig.addPassthroughCopy("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
 
@@ -81,20 +83,6 @@ module.exports = function (eleventyConfig) {
     return (tags || []).filter(
       (tag) => ["all", "nav", "post", "posts"].indexOf(tag) === -1
     );
-  });
-
-  // Customize Markdown library settings:
-  eleventyConfig.amendLibrary("md", (mdLib) => {
-    mdLib.use(markdownItAnchor, {
-      permalink: markdownItAnchor.permalink.ariaHidden({
-        placement: "after",
-        class: "header-anchor",
-        symbol: "#",
-        ariaHidden: false,
-      }),
-      level: [1, 2, 3, 4],
-      slugify: eleventyConfig.getFilter("slugify"),
-    });
   });
 
   // Features to make your build faster (when you need them)

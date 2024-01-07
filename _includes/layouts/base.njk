@@ -10,9 +10,6 @@
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 		<link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}">
 
-		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
-		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
-
 		{#-
 		CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
 		1. You can add to them using `{% css %}`
@@ -20,37 +17,27 @@
 		3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
 		4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		#}
-
-		{#- Add an arbitrary string to the bundle #}
-		{%- css %}* { box-sizing: border-box; }{% endcss %}
-		{#- Add the contents of a file to the bundle #}
-		{%- css %}{% include "public/css/index.css" %}{% endcss %}
-		{#- Or add from node_modules #}
-		{# {%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %} #}
-
-		{#- Render the CSS bundle using Inlined CSS (for the fastest site performance in production) #}
-		<style>{% getBundle "css" %}</style>
 		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
-		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
-	</head>
-	<body>
-		<a href="#skip" class="visually-hidden">Skip to main content</a>
+		<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
 
-		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
+		<link rel="stylesheet" href="/css/tailwind.css">
+		<link rel="stylesheet" href="/css/index.css">
+	</head>
+	<body class="font-sans font-normal leading-relaxed font-base text-gray-800">
+		<header class="bg-slate-100">
 
 			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
+			<nav class="container max-w-screen-md mx-auto p-5 align-text-bottom">
+			  <a href="/" class="text-4xl mr-2 font-bold text-slate-600 hover:text-slate-500">{{ metadata.title }}</a>
 				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
+					<a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %} class="text-xl mx-2 font-bold text-slate-600 hover:text-slate-500 hover:border-b-4 hover:border-slate-500 {% if entry.url == page.url %}border-b-4 border-slate-500{% endif %}">
+            {{ entry.title }}
+          </a>
 				{%- endfor %}
-				</ul>
 			</nav>
 		</header>
 
-		<main id="skip">
+		<main class="container max-w-screen-md mx-auto p-5">
 			{{ content | safe }}
 		</main>
 

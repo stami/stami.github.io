@@ -12,7 +12,7 @@ In addition to that, some data from home would be nice to have.
 
 ## Standing Desk
 
-I ordered a [ESP8266 ESP-01](https://www.sparkfun.com/products/13678) WiFi module [(2 €)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.XESP8266+ESP-01.TRS0&_nkw=ESP8266+ESP-01&_sacat=0) in order to get the data out in the wild.
+I ordered a [ESP8266 ESP-01](https://www.sparkfun.com/products/13678){target='\_blank'} WiFi module [(2 €)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.XESP8266+ESP-01.TRS0&_nkw=ESP8266+ESP-01&_sacat=0) in order to get the data out in the wild.
 
 I'm planning to use an [ultrasonic distance sensor](https://www.sparkfun.com/products/13959) [(1 €)](http://www.ebay.com/sch/i.html?_sacat=0&_nkw=ultrasonic+distance+sensor&_frs=1) to measure the desk's heigh and an [infrared PIR motion sensor](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/overview) [(1 €)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.XHC-SR501.TRS0&_nkw=HC-SR501&_sacat=0) to detect if anyone is working on the desk.
 
