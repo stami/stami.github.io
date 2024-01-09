@@ -1,7 +1,7 @@
 ---
 layout: layouts/home.njk
 eleventyNavigation:
-  key: Home
+  key: Oaken
   order: 1
 numberOfLatestPostsToShow: 5
 ---
@@ -15,6 +15,10 @@ numberOfLatestPostsToShow: 5
   <p class="my-1">made of timber from the oak tree</p>
   <p class="my-1">Also my last name – translated directly from Finnish.</p>
 </div>
+
+
+<h1>Apps</h1>
+{% include "appslist.njk" %}
 
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
