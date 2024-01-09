@@ -2,8 +2,8 @@
   "name": "oaken-11ty",
   "scripts": {
     "build:11ty": "npx @11ty/eleventy",
-    "build:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --watch --postcss",
-    "build": "yarn clean && yarn build:11ty && yarn build:css",
+    "build:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --postcss",
+    "build": "yarn clean && yarn build:11ty && yarn build:css && yarn build:11ty",
     "dev:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --watch --postcss",
     "dev:11ty": "npx @11ty/eleventy --serve --quiet",
     "start": "yarn clean && concurrently \"yarn dev:11ty\" \"yarn dev:css\"",
@@ -21,6 +21,7 @@
     "luxon": "^3.3.0",
     "markdown-it-anchor": "^8.6.7",
     "postcss": "^8.4.33",
+    "prism-themes": "^1.9.0",
     "tailwindcss": "^3.4.1"
   }
 }

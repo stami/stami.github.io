@@ -2,10 +2,6 @@
 title: Typography
 date: 2024-01-07
 draft: true
-tags:
-  - a lot
-  - of
-  - tags
 ---
 
 # Header 1

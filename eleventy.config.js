@@ -16,7 +16,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "./public/css/index.css": "/css/index.css",
     "./public/css/tailwind.css": "/css/tailwind.css",
-    "./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
+    "./node_modules/prism-themes/themes/prism-one-dark.css":
+      "/css/prism-one-dark.css",
     "./public/downloads/": "/downloads/",
   });
 

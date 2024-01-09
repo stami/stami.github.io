@@ -20,6 +20,7 @@
   /* code blocks */
   pre {
     font-size: smaller !important;
+    @apply rounded-lg;
   }
 
   img {
