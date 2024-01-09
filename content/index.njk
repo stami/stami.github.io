@@ -5,6 +5,17 @@ eleventyNavigation:
   order: 1
 numberOfLatestPostsToShow: 5
 ---
+
+<div class="border-l-8 pl-4 border-slate-500 my-8 font-serif">
+  <h1 class="text-5xl font-light my-1">
+    Oaken
+    <span class="text-slate-500 text-2xl">| ˈəʊk(ə)n |</span>
+    <span class="text-base">adjective</span>
+  </h1>
+  <p class="my-1">made of timber from the oak tree</p>
+  <p class="my-1">Also my last name – translated directly from Finnish.</p>
+</div>
+
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
 <h1>Latest Post{% if latestPostsCount != 1 %}s{% endif %}</h1>

@@ -2,7 +2,6 @@
 layout: layouts/base.njk
 ---
 
-<article class="prose prose-slate">
 {# Only include the syntax highlighter CSS on blog posts #}
 {%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
 <h1 class="mb-2">{{ title }}</h1>
@@ -32,4 +31,3 @@ layout: layouts/base.njk
 {%- endif %}
 {%- endif %}
 #}
-</article>

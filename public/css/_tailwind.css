@@ -9,13 +9,11 @@
 
     /* inline code */
     code {
-      @apply text-sm;
-      @apply bg-slate-100;
-      @apply p-1;
+      @apply text-sm p-1 bg-slate-100 dark:bg-slate-600;
     }
 
     a {
-      @apply text-slate-600 hover:text-slate-400 underline underline-offset-4 decoration-4 decoration-slate-400 hover:decoration-slate-300;
+      @apply text-slate-600 dark:text-slate-200 hover:text-slate-400 dark:hover:text-slate-400 underline underline-offset-4 decoration-4 decoration-slate-400 hover:decoration-slate-300 dark:hover:decoration-slate-500;
     }
   }
 
@@ -34,16 +32,16 @@
   }
 
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-4xl font-black mt-8 mb-4;
   }
   h2 {
-    @apply text-3xl font-bold;
+    @apply text-3xl font-bold mt-8 mb-4;
   }
   h3 {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold mt-8 mb-4;
   }
   h4 {
-    @apply text-xl font-bold;
+    @apply text-xl font-bold mt-8 mb-4;
   }
 
   blockquote {

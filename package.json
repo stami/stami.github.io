@@ -2,6 +2,8 @@
   "name": "oaken-11ty",
   "scripts": {
     "build:11ty": "npx @11ty/eleventy",
+    "build:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --watch --postcss",
+    "build": "yarn clean && yarn build:11ty && yarn build:css",
     "dev:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --watch --postcss",
     "dev:11ty": "npx @11ty/eleventy --serve --quiet",
     "start": "yarn clean && concurrently \"yarn dev:11ty\" \"yarn dev:css\"",
@@ -14,7 +16,6 @@
     "@11ty/eleventy-plugin-bundle": "^1.0.4",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-    "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
     "concurrently": "^5.3.0",
     "luxon": "^3.3.0",

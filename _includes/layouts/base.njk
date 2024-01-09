@@ -23,15 +23,15 @@
 		<link rel="stylesheet" href="/css/tailwind.css">
 		<link rel="stylesheet" href="/css/index.css">
 	</head>
-	<body class="font-sans font-normal leading-relaxed font-base text-gray-800">
-		<header class="bg-slate-100">
+	<body class="font-sans font-normal leading-relaxed font-base bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200">
+		<header class="bg-slate-100 dark:bg-slate-800">
 			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
 			<nav class="container max-w-screen-md mx-auto p-5 align-text-bottom flex flex-col sm:flex-row gap-2 sm:items-end">
-			  <a href="/" class="text-4xl mr-2 font-bold text-slate-600 hover:text-slate-500">{{ metadata.title }}</a>
+			  <a href="/" class="text-4xl mr-2 font-black text-slate-600 dark:text-slate-200 hover:text-slate-500 dark:hover:text-slate-400">{{ metadata.title }}</a>
 
         <div class="flex flex-row flex-wrap gap-4">
 				{%- for entry in collections.all | eleventyNavigation %}
-					<a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %} class="text-xl font-bold text-slate-600 hover:text-slate-500 hover:underline decoration-4 decoration-slate-500 {% if entry.url == page.url %}underline{% endif %}">
+					<a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %} class="text-xl font-bold hover:underline underline-offset-4 decoration-4 decoration-slate-500 dark:decoration-slate-300 hover:decoration-slate-400 dark:hover:decoration-slate-500 text-slate-600 dark:text-slate-200 hover:text-slate-500 dark:hover:text-slate-400 {% if entry.url == page.url %}underline{% endif %}">
             {{ entry.title }}
           </a>
 				{%- endfor %}
