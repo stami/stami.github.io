@@ -19,6 +19,7 @@ module.exports = function (eleventyConfig) {
     "./node_modules/prism-themes/themes/prism-one-dark.css":
       "/css/prism-one-dark.css",
     "./public/downloads/": "/downloads/",
+    "./public/lasku-fraktuura/": "/lasku-fraktuura/",
   });
 
   // Run Eleventy when these files change:
