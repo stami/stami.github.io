@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="/css/tailwind.css">
 		<link rel="stylesheet" href="/css/index.css">
 	</head>
-	<body class="font-sans font-normal leading-relaxed font-base bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+	<body class="font-sans font-normal leading-relaxed font-base bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col flex-1 min-h-svh">
 		<header class="bg-slate-100 dark:bg-slate-800">
 			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
 			<nav class="container max-w-screen-md mx-auto p-5 flex flex-row items-end flex-wrap gap-4">
@@ -35,11 +35,17 @@
 			</nav>
 		</header>
 
-		<main class="container max-w-screen-md mx-auto p-5">
+		<main class="container max-w-screen-md mx-auto p-5 flex-1">
 			{{ content | safe }}
 		</main>
 
-		<footer></footer>
+		<footer class="text-xs text-gray-500 container max-w-screen-md mx-auto p-5 flex flex-col">
+      <div class="border-t-2 border-slate-200 dark:border-slate-600" />
+      <div class="flex pt-5 flex-row justify-between">
+        <span>© Samuli Tamminen</span>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+    </footer>
 
 		<!-- Current page: {{ page.url | htmlBaseUrl }} -->
 	</body>
