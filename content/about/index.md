@@ -7,8 +7,8 @@ eleventyNavigation:
 
 # About Me
 
-<div class="flex flex-row gap-10 align-top my-8">
-  <img class="rounded-full w-40 h-40" alt="Photo of me" src="selfie.jpg" />
+<div class="flex flex-row gap-4 sm:gap-10 align-top my-8">
+  <img class="rounded-full w-24 h-24 sm:w-40 sm:h-40" alt="Photo of me" src="selfie.jpg" />
 
 <div>
 My name is Samuli Tamminen,<br>

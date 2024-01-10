@@ -3,7 +3,7 @@ layout: layouts/home.njk
 ---
 
 <header class="flex flex-col items-center text-center">
-  <img width="150" height="150" src="glucosegraph-icon.png">
+  <img class="w-24 h-24 lg:w-40 lg:h-40" src="glucosegraph-icon.png">
   <h1 class="mt-4">Glucose Graph</h1>
   <p class="mt-0">Your blood glucose right on the menu bar.</p>
 </header>
