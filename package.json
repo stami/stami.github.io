@@ -2,12 +2,12 @@
   "name": "oaken-11ty",
   "scripts": {
     "build:11ty": "npx @11ty/eleventy",
-    "build:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --postcss",
-    "build": "yarn clean && yarn build:11ty && yarn build:css && yarn build:11ty",
-    "dev:css": "tailwindcss -i public/css/_tailwind.css -o public/css/tailwind.css --watch --postcss",
+    "build:css": "npx tailwindcss -i public/css/_tailwind.css -o public/css/generated.css --minify",
+    "build": "yarn clean && yarn build:css && yarn build:11ty",
+    "dev:css": "tailwindcss -i public/css/_tailwind.css -o public/css/generated.css --watch",
     "dev:11ty": "npx @11ty/eleventy --serve --quiet",
     "start": "yarn clean && concurrently \"yarn dev:11ty\" \"yarn dev:css\"",
-    "clean": "rm -rf _site public/css/tailwind.css"
+    "clean": "rm -rf _site public/css/generated.css"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",

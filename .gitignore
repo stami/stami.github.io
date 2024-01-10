@@ -3,4 +3,4 @@ node_modules/
 package-lock.json
 
 # generated tailwind classes
-public/css/tailwind.css
+public/css/generated.css

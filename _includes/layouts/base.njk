@@ -17,11 +17,11 @@
 		3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
 		4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		#}
+    {%- css %}{% include "public/css/index.css" %}{% endcss %}
+    {%- css %}{% include "public/css/generated.css" %}{% endcss %}
+
 		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
 		<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
-
-		<link rel="stylesheet" href="/css/tailwind.css">
-		<link rel="stylesheet" href="/css/index.css">
 	</head>
 	<body class="font-sans font-normal leading-relaxed font-base bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col flex-1 min-h-svh">
 		<header class="bg-slate-100 dark:bg-slate-800">

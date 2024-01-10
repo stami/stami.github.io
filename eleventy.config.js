@@ -11,22 +11,15 @@ const pluginDrafts = require("./eleventy.config.drafts.js");
 const pluginImages = require("./eleventy.config.images.js");
 
 module.exports = function (eleventyConfig) {
-  // Copy the contents of the `public` folder to the output folder
-  // For example, `./public/css/` ends up in `_site/css/`
   eleventyConfig.addPassthroughCopy({
-    "./public/css/index.css": "/css/index.css",
-    "./public/css/tailwind.css": "/css/tailwind.css",
-    "./node_modules/prism-themes/themes/prism-one-dark.css":
-      "/css/prism-one-dark.css",
     "./public/downloads/": "/downloads/",
     "./public/lasku-fraktuura/": "/lasku-fraktuura/",
   });
 
   // Run Eleventy when these files change:
-  // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
+  eleventyConfig.addWatchTarget("public/css/generated.css");
 
   // Watch content images for the image pipeline.
-  eleventyConfig.addWatchTarget("public/css/tailwind.css");
   eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
   eleventyConfig.addPassthroughCopy("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
 
@@ -87,14 +80,6 @@ module.exports = function (eleventyConfig) {
       (tag) => ["all", "nav", "post", "posts"].indexOf(tag) === -1
     );
   });
-
-  // Features to make your build faster (when you need them)
-
-  // If your passthrough copy gets heavy and cumbersome, add this line
-  // to emulate the file copy on the dev server. Learn more:
-  // https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
-
-  // eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
   return {
     // Control which files Eleventy will process
