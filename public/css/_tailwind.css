@@ -9,7 +9,7 @@
 
     /* inline code */
     code {
-      @apply text-sm p-1 bg-slate-100 dark:bg-slate-600;
+      @apply text-sm;
     }
 
     a {
@@ -32,6 +32,14 @@
     @apply pl-8;
   }
 
+  li {
+    @apply text-base;
+
+    code {
+      @apply text-sm;
+    }
+  }
+
   h1 {
     @apply text-4xl font-black mt-8 mb-4;
   }
@@ -43,6 +51,10 @@
   }
   h4 {
     @apply text-xl font-bold mt-8 mb-4;
+  }
+
+  code {
+    @apply p-1 bg-slate-100 dark:bg-slate-600;
   }
 
   blockquote {
