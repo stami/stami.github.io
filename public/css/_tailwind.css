@@ -28,6 +28,7 @@
   }
 
   ul {
+    @apply my-4;
     @apply list-disc;
     @apply pl-8;
   }
