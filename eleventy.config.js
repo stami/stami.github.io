@@ -12,6 +12,7 @@ const pluginImages = require("./eleventy.config.images.js");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
+    "./public/img/": "/img/",
     "./public/downloads/": "/downloads/",
     "./public/lasku-fraktuura/": "/lasku-fraktuura/",
   });

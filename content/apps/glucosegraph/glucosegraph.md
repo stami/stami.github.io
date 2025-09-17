@@ -3,9 +3,13 @@ layout: layouts/home.njk
 ---
 
 <header class="flex flex-col items-center text-center">
-  <img class="w-24 h-24 lg:w-40 lg:h-40" src="glucosegraph-icon.png">
+  <img class="w-24 h-24 lg:w-32 lg:h-32" src="glucosegraph-icon.png">
   <h1 class="mt-4">Glucose Graph</h1>
   <p class="mt-0">Your blood glucose right on the menu bar.</p>
+
+  <a href="https://apps.apple.com/fi/app/glucose-graph/id1668560499" target="_blank">
+    <img alt="Download on the App Store" src="/img/appstore.svg" />
+  </a>
 </header>
 
 ![Screenshot of the app](screenshot.webp)
