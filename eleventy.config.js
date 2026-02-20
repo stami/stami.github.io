@@ -15,6 +15,7 @@ module.exports = function (eleventyConfig) {
     "./public/img/": "/img/",
     "./public/downloads/": "/downloads/",
     "./public/lasku-fraktuura/": "/lasku-fraktuura/",
+    "./public/misc/": "/misc/",
   });
 
   // Run Eleventy when these files change:
@@ -41,7 +42,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
-      format || "d LLLL yyyy"
+      format || "d LLLL yyyy",
     );
   });
 
@@ -78,7 +79,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
     return (tags || []).filter(
-      (tag) => ["all", "nav", "post", "posts"].indexOf(tag) === -1
+      (tag) => ["all", "nav", "post", "posts"].indexOf(tag) === -1,
     );
   });
 
