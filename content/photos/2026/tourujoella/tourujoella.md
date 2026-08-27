@@ -3,9 +3,7 @@ title: Tourujoella
 date: 2026-08-26
 photos:
   - image: dsc_3175.jpg
-    alt: " "
   - image: dsc_3143.jpg
-    alt: " "
   - image: dsc_3593.jpg
   - image: dsc_3325.jpg
 ---
