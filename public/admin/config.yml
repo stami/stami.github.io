@@ -18,6 +18,48 @@ slug:
   clean_accents: true
 
 collections:
+  - name: photos
+    label: Photos
+    label_singular: Photo gallery
+    folder: content/photos
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    path: "{{year}}/{{slug}}/{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    summary: "{{date}} - {{title}}"
+    sortable_fields:
+      - date
+      - title
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+      - label: Photos
+        name: photos
+        widget: list
+        min: 1
+        summary: "{{fields.image}}"
+        fields:
+          - label: Image
+            name: image
+            widget: image
+          - label: Caption
+            name: caption
+            widget: string
+            required: false
+
   - name: blog
     label: Blog
     label_singular: Post

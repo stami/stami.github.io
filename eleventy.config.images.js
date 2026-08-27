@@ -2,6 +2,14 @@ const path = require("path");
 const eleventyImage = require("@11ty/eleventy-img");
 
 module.exports = (eleventyConfig) => {
+  function escapeHtml(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+
   function relativeToInputPath(inputPath, relativeFilePath) {
     let split = inputPath.split("/");
     split.pop();
@@ -33,5 +41,63 @@ module.exports = (eleventyConfig) => {
       };
       return eleventyImage.generateHTML(metadata, imageAttributes);
     }
+  );
+
+  async function galleryImageShortcode(src, alt, caption, inputPath) {
+    let file = relativeToInputPath(inputPath || this.page.inputPath, src);
+    let metadata = await eleventyImage(file, {
+      widths: [320, 640, 960, 1600, "auto"],
+      formats: ["avif", "webp", "auto"],
+      outputDir: path.join(eleventyConfig.dir.output, "img"),
+    });
+    let originalFormat = path.extname(file).slice(1).toLowerCase();
+    let originals = metadata[originalFormat] || Object.values(metadata).at(-1);
+    let fullImage = originals.at(-1);
+    let imageHtml = eleventyImage.generateHTML(metadata, {
+      alt: alt || "",
+      sizes: "(min-width: 768px) 384px, 50vw",
+      loading: "lazy",
+      decoding: "async",
+    });
+
+    return `<a href="${fullImage.url}" data-pswp-width="${fullImage.width}" data-pswp-height="${fullImage.height}" target="_blank"${caption ? ` data-pswp-caption="${escapeHtml(caption)}"` : ""}>${imageHtml}</a>`;
+  }
+
+  eleventyConfig.addAsyncShortcode("galleryImage", galleryImageShortcode);
+
+  eleventyConfig.addAsyncShortcode(
+    "expandedPhotoPosts",
+    async function expandedPhotoPostsShortcode(collection, limit) {
+      let posts = Array.from(collection).slice(-limit).reverse();
+      let articles = [];
+
+      for (let post of posts) {
+        let figures = await Promise.all(
+          post.data.photos.map(async (photo) => {
+            let image = await galleryImageShortcode.call(
+              this,
+              photo.image,
+              photo.alt,
+              photo.caption,
+              post.inputPath,
+            );
+            let caption = photo.caption
+              ? `<figcaption class="mt-1 text-sm">${escapeHtml(photo.caption)}</figcaption>`
+              : "";
+            return `<figure class="m-0 min-w-0">${image}${caption}</figure>`;
+          }),
+        );
+
+        articles.push(`<article class="mb-12">
+  <h2><a href="${post.url}">${escapeHtml(post.data.title)}</a></h2>
+  ${post.templateContent}
+  <div class="photo-gallery mt-6 grid grid-cols-2 gap-2 md:grid-cols-3">
+    ${figures.join("\n    ")}
+  </div>
+</article>`);
+      }
+
+      return articles.join("\n");
+    },
   );
 };

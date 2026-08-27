@@ -74,6 +74,17 @@
     return "/blog/" + parts.join("/") + "/";
   }
 
+  function photosBasePath(entry) {
+    var parts = (entry.get("slug") || "").split("/").filter(Boolean);
+    var lastIndex = parts.length - 1;
+
+    if (lastIndex > 0 && parts[lastIndex] === parts[lastIndex - 1]) {
+      parts.pop();
+    }
+
+    return "/photos/" + parts.join("/") + "/";
+  }
+
   var BlogPreview = createClass({
     componentDidMount: function () {
       restoreMarkdownImages(this);
@@ -117,10 +128,59 @@
     },
   });
 
+  var PhotosPreview = createClass({
+    render: function () {
+      prepareDocument(this, photosBasePath);
+
+      var entry = this.props.entry;
+      var photos = entry.getIn(["data", "photos"]);
+      var getAsset = this.props.getAsset;
+      var photoElements = photos
+        ? photos
+            .map(function (photo, index) {
+              var image = photo.get("image");
+
+              return h(
+                "figure",
+                { className: "m-0", key: image || index },
+                image
+                  ? h("img", {
+                      alt: photo.get("alt") || "",
+                      className: "aspect-square h-full w-full object-cover",
+                      src: getAsset(image).toString(),
+                    })
+                  : null,
+                photo.get("caption")
+                  ? h(
+                      "figcaption",
+                      { className: "mt-1 text-sm" },
+                      photo.get("caption"),
+                    )
+                  : null,
+              );
+            })
+            .toArray()
+        : [];
+
+      return h(
+        "main",
+        { className: mainClasses },
+        h("h1", {}, entry.getIn(["data", "title"])),
+        this.props.widgetFor("body"),
+        h(
+          "div",
+          { className: "mt-6 grid grid-cols-2 gap-2 md:grid-cols-3" },
+          photoElements,
+        ),
+      );
+    },
+  });
+
   CMS.registerPreviewStyle("/admin/preview-base.css");
   CMS.registerPreviewStyle("/admin/preview-tailwind.css");
   CMS.registerPreviewStyle("/admin/preview-code.css");
 
+  CMS.registerPreviewTemplate("photos", PhotosPreview);
   CMS.registerPreviewTemplate("blog", BlogPreview);
   CMS.registerPreviewTemplate("about", createPagePreview("/about/"));
   CMS.registerPreviewTemplate("privacy", createPagePreview("/privacy/"));

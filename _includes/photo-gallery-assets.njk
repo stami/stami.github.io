@@ -1,0 +1,47 @@
+{%- css %}{% include "node_modules/photoswipe/dist/photoswipe.css" %}{% endcss %}
+{%- css %}
+.photo-gallery img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.pswp__custom-caption {
+  background: rgb(15 23 42 / 80%);
+  bottom: 1rem;
+  color: white;
+  left: 50%;
+  max-width: min(90%, 48rem);
+  padding: 0.5rem 0.75rem;
+  position: absolute;
+  transform: translateX(-50%);
+}
+{% endcss %}
+
+<script type="module">
+  import PhotoSwipeLightbox from "/vendor/photoswipe/photoswipe-lightbox.esm.js";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: ".photo-gallery",
+    children: "a",
+    pswpModule: () => import("/vendor/photoswipe/photoswipe.esm.js"),
+  });
+
+  lightbox.on("uiRegister", () => {
+    lightbox.pswp.ui.registerElement({
+      name: "custom-caption",
+      order: 9,
+      isButton: false,
+      appendTo: "root",
+      onInit: (element, photoSwipe) => {
+        photoSwipe.on("change", () => {
+          const slideElement = photoSwipe.currSlide.data.element;
+          element.textContent = slideElement?.dataset.pswpCaption || "";
+          element.hidden = !element.textContent;
+        });
+      },
+    });
+  });
+
+  lightbox.init();
+</script>

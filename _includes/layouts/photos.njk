@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+---
+
+{% include "photo-gallery-assets.njk" %}
+
+<article>
+	<h1>{{ title }}</h1>
+	{{ content | safe }}
+
+	<div class="photo-gallery mt-6 grid grid-cols-2 gap-2 md:grid-cols-3">
+		{%- for photo in photos %}
+		<figure class="m-0 min-w-0">
+			{% galleryImage photo.image, photo.alt, photo.caption %}
+			{%- if photo.caption %}<figcaption class="mt-1 text-sm">{{ photo.caption | escape }}</figcaption>{% endif %}
+		</figure>
+		{%- endfor %}
+	</div>
+</article>

@@ -15,6 +15,10 @@ module.exports = function (eleventyConfig) {
     "./public/admin/": "/admin/",
     "./public/css/generated.css": "/admin/preview-tailwind.css",
     "./public/css/index.css": "/admin/preview-base.css",
+    "./node_modules/photoswipe/dist/photoswipe.esm.js":
+      "/vendor/photoswipe/photoswipe.esm.js",
+    "./node_modules/photoswipe/dist/photoswipe-lightbox.esm.js":
+      "/vendor/photoswipe/photoswipe-lightbox.esm.js",
     "./node_modules/prism-themes/themes/prism-one-dark.css":
       "/admin/preview-code.css",
     "./public/img/": "/img/",
@@ -84,7 +88,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
     return (tags || []).filter(
-      (tag) => ["all", "nav", "post", "posts"].indexOf(tag) === -1,
+      (tag) => ["all", "nav", "photos", "post", "posts"].indexOf(tag) === -1,
     );
   });
 

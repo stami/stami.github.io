@@ -1,0 +1,15 @@
+---
+layout: layouts/home.njk
+title: Photos
+eleventyNavigation:
+  key: Photos
+  order: 4
+---
+<h1>Photos</h1>
+
+{% include "photo-gallery-assets.njk" %}
+{% expandedPhotoPosts collections.photos, 5 %}
+
+{% if collections.photos.length > 5 %}
+<p><a href="/photos/all/">All photos</a></p>
+{% endif %}
