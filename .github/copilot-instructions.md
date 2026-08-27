@@ -18,9 +18,11 @@
 
 - Start Eleventy and the Tailwind watcher with `yarn start`.
 - Build the production site with `yarn build`.
+- Validate changes in isolated temporary output with `yarn validate`.
 - Rebuild only CSS with `yarn build:css`.
 - Rebuild only Eleventy output with `yarn build:11ty` after CSS already exists.
-- There are no separate lint or automated test commands. Run `yarn build` after changes; treat a successful build as the required validation.
+- There are no separate lint or automated test commands. Run `yarn validate` after changes; treat a successful validation as the required check.
+- Never run `yarn build`, `yarn build:css`, `yarn build:11ty`, or `yarn clean` while `yarn start` is running because they share its output paths.
 
 ## Source Boundaries
 
@@ -49,6 +51,7 @@
 
 ## Validation And Deployment
 
-- Run `yarn build` before considering a change complete. If it fails, rerun the narrower failing stage (`yarn build:css` or `yarn build:11ty`) and fix the reported source file.
+- Run `yarn validate` before considering a change complete. It writes only to ignored `.validation/` paths and does not disturb a running development server.
+- Use `yarn build` only when production output is explicitly required and `yarn start` is not running.
 - Inspect generated pages in `_site/` only as build artifacts; apply fixes to their source files.
 - GitHub Actions builds and deploys `_site/` to GitHub Pages on pushes to `master`. Never trigger or modify deployment behavior unless explicitly requested.

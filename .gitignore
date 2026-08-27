@@ -1,5 +1,6 @@
 _site/
 _netlify/
+.validation/
 node_modules/
 package-lock.json
 

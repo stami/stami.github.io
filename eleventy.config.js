@@ -11,9 +11,12 @@ const pluginDrafts = require("./eleventy.config.drafts.js");
 const pluginImages = require("./eleventy.config.images.js");
 
 module.exports = function (eleventyConfig) {
+  const generatedCssPath =
+    process.env.ELEVENTY_GENERATED_CSS || "./public/css/generated.css";
+
   eleventyConfig.addPassthroughCopy({
     "./public/admin/": "/admin/",
-    "./public/css/generated.css": "/admin/preview-tailwind.css",
+    [generatedCssPath]: "/admin/preview-tailwind.css",
     "./public/css/index.css": "/admin/preview-base.css",
     "./node_modules/photoswipe/dist/photoswipe.esm.js":
       "/vendor/photoswipe/photoswipe.esm.js",
@@ -28,7 +31,7 @@ module.exports = function (eleventyConfig) {
   });
 
   // Run Eleventy when these files change:
-  eleventyConfig.addWatchTarget("public/css/generated.css");
+  eleventyConfig.addWatchTarget(generatedCssPath);
 
   // Watch content images for the image pipeline.
   eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
