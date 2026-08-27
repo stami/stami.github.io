@@ -104,6 +104,7 @@ module.exports = function (eleventyConfig) {
         .map((photo) => ({
           ...photo,
           inputPath: post.inputPath,
+          postDate: post.date,
           postTitle: post.data.title,
           postUrl: post.url,
         })),

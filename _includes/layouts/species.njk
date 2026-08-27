@@ -16,7 +16,8 @@ layout: layouts/base.njk
 			{% galleryImage photo.image, photo.alt, photo.caption, photo.inputPath %}
 			<figcaption class="mt-1 text-sm">
 				{%- if photo.caption %}{{ photo.caption | escape }} · {% endif -%}
-				<a href="{{ photo.postUrl }}">{{ photo.postTitle }}</a>
+				<a href="{{ photo.postUrl }}">{{ photo.postTitle }}</a> ·
+				<time datetime="{{ photo.postDate | htmlDateString }}">{{ photo.postDate | readableDate("LLLL yyyy") }}</time>
 			</figcaption>
 		</figure>
 		{%- endfor %}
