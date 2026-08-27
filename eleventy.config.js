@@ -88,7 +88,22 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
     return (tags || []).filter(
-      (tag) => ["all", "nav", "photos", "post", "posts"].indexOf(tag) === -1,
+      (tag) =>
+        ["all", "nav", "photos", "post", "posts", "species"].indexOf(tag) ===
+        -1,
+    );
+  });
+
+  eleventyConfig.addFilter("speciesPhotos", (collection, species) => {
+    return collection.flatMap((post) =>
+      (post.data.photos || [])
+        .filter((photo) => (photo.species || []).includes(species))
+        .map((photo) => ({
+          ...photo,
+          inputPath: post.inputPath,
+          postTitle: post.data.title,
+          postUrl: post.url,
+        })),
     );
   });
 

@@ -23,7 +23,7 @@
 
   const lightbox = new PhotoSwipeLightbox({
     gallery: ".photo-gallery",
-    children: "a",
+    children: "a[data-pswp-width]",
     pswpModule: () => import("/vendor/photoswipe/photoswipe.esm.js"),
   });
 

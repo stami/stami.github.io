@@ -60,6 +60,42 @@ collections:
             name: caption
             widget: string
             required: false
+          - label: Species
+            name: species
+            widget: relation
+            collection: species
+            search_fields:
+              - title
+              - scientificName
+            display_fields:
+              - title
+              - scientificName
+            value_field: "{{slug}}"
+            multiple: true
+            required: false
+  - name: species
+    label: Species
+    label_singular: Species
+    folder: content/species
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} ({{scientificName}})"
+    sortable_fields:
+      - title
+      - scientificName
+    fields:
+      - label: Name
+        name: title
+        widget: string
+      - label: Scientific name
+        name: scientificName
+        widget: string
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
 
   - name: blog
     label: Blog
