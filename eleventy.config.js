@@ -107,6 +107,10 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+    eleventyConfig.addFilter("photoAlbumCount", (photos) => {
+      return new Set(photos.map((photo) => photo.postUrl)).size;
+    });
+
   return {
     // Control which files Eleventy will process
     // e.g.: *.md, *.njk, *.html, *.liquid
