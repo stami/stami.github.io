@@ -5,7 +5,8 @@ layout: layouts/base.njk
 {% include "photo-gallery-assets.njk" %}
 
 <article>
-	<h1>{{ title }}</h1>
+	<h1 class="mb-2">{{ title }}</h1>
+	<time class="text-slate-500 dark:text-slate-400" datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
 	{{ content | safe }}
 
 	<div class="photo-gallery mt-6 columns-2 gap-2">

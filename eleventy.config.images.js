@@ -1,9 +1,10 @@
 const path = require("path");
 const eleventyImage = require("@11ty/eleventy-img");
+const { DateTime } = require("luxon");
 
 module.exports = (eleventyConfig) => {
   function escapeHtml(value) {
-    return String(value || "")
+  return String(value || "")
       .replaceAll("&", "&amp;")
       .replaceAll('"', "&quot;")
       .replaceAll("<", "&lt;")
@@ -88,8 +89,10 @@ module.exports = (eleventyConfig) => {
           }),
         );
 
+        let postDate = DateTime.fromJSDate(post.date, { zone: "utc" });
         articles.push(`<article class="mb-12">
-  <h2><a href="${post.url}">${escapeHtml(post.data.title)}</a></h2>
+  <h2 class="mb-2"><a href="${post.url}">${escapeHtml(post.data.title)}</a></h2>
+  <time class="block text-slate-500 dark:text-slate-400" datetime="${postDate.toFormat("yyyy-LL-dd")}">${postDate.toFormat("d LLLL yyyy")}</time>
   ${post.templateContent}
   <div class="photo-gallery mt-6 columns-2 gap-2">
     ${figures.join("\n    ")}
