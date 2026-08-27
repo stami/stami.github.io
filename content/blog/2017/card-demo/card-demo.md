@@ -1,7 +1,7 @@
 ---
 title: Experiementing with UIKit animations
 date: 2017-07-04
-tags: iOS
+tags: [iOS]
 ---
 
 I've been watching WWCD 2017 videos lately and experiementing with the stuff. [Session 230 - Advanced Animations with UIKit](https://developer.apple.com/videos/play/wwdc2017/230/) was really interesting and I decided to play with the example they showed in the end of the session.

@@ -1,7 +1,7 @@
 ---
 title: 3D printed bearing for coffee grinder
 date: 2016-03-17
-tags: diy
+tags: [diy]
 ---
 
 ![Printed bearings](3d-feature.jpg)

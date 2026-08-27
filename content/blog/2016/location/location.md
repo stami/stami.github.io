@@ -1,7 +1,7 @@
 ---
 title: Location - A Sports Tracking App
 date: 2016-05-14
-tags: iOS
+tags: [iOS]
 ---
 
 ![Screenshots from the app](location-screenshots.png)

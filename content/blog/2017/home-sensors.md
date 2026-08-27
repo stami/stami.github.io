@@ -1,7 +1,7 @@
 ---
 title: Home Sensors
 date: 2017-02-12
-tags: embedded
+tags: [embedded]
 ---
 
 I've been recently inspired to do some IoT stuff, more specifically, make an automated system to collect data and visualize it.

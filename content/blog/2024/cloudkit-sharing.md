@@ -1,7 +1,7 @@
 ---
 title: On CloudKit Sharing
 date: 2024-02-21
-tags: iOS
+tags: [iOS]
 ---
 
 There's a lot of articles of how to set up CloudKit syncing for private database.

@@ -1,0 +1,146 @@
+backend:
+  name: github
+  repo: stami/stami.github.io
+  branch: master
+
+local_backend:
+  url: http://localhost:8082/api/v1
+
+site_url: https://oaken.fi
+display_url: https://oaken.fi
+show_preview_links: false
+
+media_folder: public/img
+public_folder: /img
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: blog
+    label: Blog
+    label_singular: Post
+    folder: content/blog
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    path: "{{year}}/{{slug}}/{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    summary: "{{date}} - {{title}}"
+    sortable_fields:
+      - date
+      - title
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: true
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+
+  - name: pages
+    label: Pages
+    media_folder: ""
+    public_folder: ""
+    files:
+      - name: about
+        label: About
+        file: content/about/index.md
+        fields:
+          - name: layout
+            widget: hidden
+            default: layouts/base.njk
+          - label: Navigation
+            name: eleventyNavigation
+            widget: object
+            collapsed: true
+            fields:
+              - label: Label
+                name: key
+                widget: string
+              - label: Order
+                name: order
+                widget: number
+                value_type: int
+          - label: Body
+            name: body
+            widget: markdown
+      - name: privacy
+        label: Privacy Policy
+        file: content/privacy.md
+        fields:
+          - name: layout
+            widget: hidden
+            default: layouts/base.njk
+          - label: Body
+            name: body
+            widget: markdown
+      - name: not_found
+        label: Not Found
+        file: content/404.md
+        fields:
+          - name: layout
+            widget: hidden
+            default: layouts/home.njk
+          - name: permalink
+            widget: hidden
+            default: 404.html
+          - name: eleventyExcludeFromCollections
+            widget: hidden
+            default: true
+          - label: Body
+            name: body
+            widget: markdown
+
+  - name: apps
+    label: Apps
+    media_folder: ""
+    public_folder: ""
+    files:
+      - name: glucose_graph
+        label: Glucose Graph
+        file: content/apps/glucosegraph/glucosegraph.md
+        fields:
+          - name: layout
+            widget: hidden
+            default: layouts/home.njk
+          - label: Body
+            name: body
+            widget: markdown
+
+  - name: projects
+    label: Projects
+    media_folder: img
+    public_folder: img
+    files:
+      - name: van
+        label: Van Conversion
+        file: content/diy/van/van.md
+        fields:
+          - name: layout
+            widget: hidden
+            default: layouts/home.njk
+          - label: Body
+            name: body
+            widget: markdown

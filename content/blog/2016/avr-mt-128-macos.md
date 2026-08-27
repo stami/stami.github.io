@@ -1,7 +1,7 @@
 ---
 title: AVR-MT128 development with macOS
 date: 2016-03-09
-tags: embedded
+tags: [embedded]
 ---
 
 I borrowed Olimex board from school for hacking and learning purposes. It wasn't too hard to get it working with my MacBook Pro.

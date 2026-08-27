@@ -12,6 +12,11 @@ const pluginImages = require("./eleventy.config.images.js");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
+    "./public/admin/": "/admin/",
+    "./public/css/generated.css": "/admin/preview-tailwind.css",
+    "./public/css/index.css": "/admin/preview-base.css",
+    "./node_modules/prism-themes/themes/prism-one-dark.css":
+      "/admin/preview-code.css",
     "./public/img/": "/img/",
     "./public/downloads/": "/downloads/",
     "./public/lasku-fraktuura/": "/lasku-fraktuura/",
