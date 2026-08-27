@@ -18,5 +18,3 @@ photos:
 Virtavästäräkki oli Tiiran mukaan nähty joella, joten sitä piti lähteä etsimään. Yksi naaraslintu löytyi.
 
 Virrassa oli myös paljon västäräkkejä saalistamassa hyönteisiä.
-
-Nikon D500 + Nikkor AF-S 200-500mm f/5.6E ED VR

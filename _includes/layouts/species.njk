@@ -10,9 +10,9 @@ layout: layouts/base.njk
 	<p class="text-slate-500 dark:text-slate-400"><i>{{ scientificName }}</i></p>
 	{{ content | safe }}
 
-	<div class="photo-gallery mt-6 grid grid-cols-2 gap-2">
+	<div class="photo-gallery mt-6 columns-2 gap-2">
 		{%- for photo in photos %}
-		<figure class="m-0 min-w-0">
+		<figure class="mb-2 break-inside-avoid">
 			{% galleryImage photo.image, photo.alt, photo.caption, photo.inputPath %}
 			<figcaption class="mt-1 text-sm">
 				{%- if photo.caption %}{{ photo.caption | escape }} · {% endif -%}

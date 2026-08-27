@@ -27,6 +27,5 @@ photos:
     species:
       - korppi
 ---
-Korppiparvi kokoontui kallion laelle. Ensin linnut kaartelivat korkealla taivaalla, sitten osa laskeutui kalliolle tarkkailemaan ympäristöä.
 
-Rauhallinen kokoontuminen muuttui välillä nahisteluksi. Pian parvi nousi jälleen siivilleen ja hajaantui metsän ylle.
+Teollisuusalueen laitamilla oleva paljas kallio jostain syystä houkutteli korppeja paikalle.

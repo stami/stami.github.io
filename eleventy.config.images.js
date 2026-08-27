@@ -84,14 +84,14 @@ module.exports = (eleventyConfig) => {
             let caption = photo.caption
               ? `<figcaption class="mt-1 text-sm">${escapeHtml(photo.caption)}</figcaption>`
               : "";
-            return `<figure class="m-0 min-w-0">${image}${caption}</figure>`;
+            return `<figure class="mb-2 break-inside-avoid">${image}${caption}</figure>`;
           }),
         );
 
         articles.push(`<article class="mb-12">
   <h2><a href="${post.url}">${escapeHtml(post.data.title)}</a></h2>
   ${post.templateContent}
-  <div class="photo-gallery mt-6 grid grid-cols-2 gap-2">
+  <div class="photo-gallery mt-6 columns-2 gap-2">
     ${figures.join("\n    ")}
   </div>
 </article>`);
