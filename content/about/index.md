@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 eleventyNavigation:
   key: Me
-  order: 4
+  order: 6
 ---
 
 # About Me
