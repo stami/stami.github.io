@@ -7,6 +7,15 @@
     <title>Oaken CMS</title>
   </head>
   <body>
+    <script>
+      if (window.location.hostname === "oaken.fi") {
+        window.location.replace(
+          "https://oaken-stami-decap-cms.netlify.app/admin/" +
+            window.location.search +
+            window.location.hash,
+        );
+      }
+    </script>
     <script src="https://unpkg.com/decap-cms@3.15.1/dist/decap-cms.js"></script>
     <script src="preview.js"></script>
   </body>

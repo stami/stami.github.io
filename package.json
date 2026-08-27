@@ -3,6 +3,7 @@
   "scripts": {
     "build:11ty": "npx @11ty/eleventy",
     "build:css": "npx tailwindcss -i public/css/_tailwind.css -o public/css/generated.css --minify",
+    "build:cms": "yarn build:css && rm -rf _netlify && mkdir -p _netlify/admin && cp -R public/admin/. _netlify/admin/ && cp public/css/generated.css _netlify/admin/preview-tailwind.css && cp public/css/index.css _netlify/admin/preview-base.css && cp node_modules/prism-themes/themes/prism-one-dark.css _netlify/admin/preview-code.css",
     "build": "yarn clean && yarn build:css && yarn build:11ty",
     "dev:css": "tailwindcss -i public/css/_tailwind.css -o public/css/generated.css --watch",
     "dev:11ty": "npx @11ty/eleventy --serve --quiet",

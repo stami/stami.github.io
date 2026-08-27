@@ -2,6 +2,7 @@ backend:
   name: github
   repo: stami/stami.github.io
   branch: master
+  site_domain: oaken-stami-decap-cms.netlify.app
 
 local_backend:
   url: http://localhost:8082/api/v1
