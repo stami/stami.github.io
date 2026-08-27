@@ -169,7 +169,7 @@
         this.props.widgetFor("body"),
         h(
           "div",
-          { className: "mt-6 grid grid-cols-2 gap-2 md:grid-cols-3" },
+          { className: "mt-6 grid grid-cols-2 gap-2" },
           photoElements,
         ),
       );

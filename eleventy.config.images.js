@@ -91,7 +91,7 @@ module.exports = (eleventyConfig) => {
         articles.push(`<article class="mb-12">
   <h2><a href="${post.url}">${escapeHtml(post.data.title)}</a></h2>
   ${post.templateContent}
-  <div class="photo-gallery mt-6 grid grid-cols-2 gap-2 md:grid-cols-3">
+  <div class="photo-gallery mt-6 grid grid-cols-2 gap-2">
     ${figures.join("\n    ")}
   </div>
 </article>`);
