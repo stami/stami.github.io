@@ -18,3 +18,5 @@ photos:
 Virtavästäräkki oli Tiiran mukaan nähty joella, joten sitä piti lähteä etsimään. Yksi naaraslintu löytyi.
 
 Virrassa oli myös paljon västäräkkejä saalistamassa hyönteisiä.
+
+*62.259067°N, 25.748263°E*
