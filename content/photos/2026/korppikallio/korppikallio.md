@@ -27,5 +27,8 @@ photos:
     species:
       - korppi
 ---
-
 Teollisuusalueen laitamilla oleva paljas kallio jostain syystä houkutteli korppeja paikalle.
+
+
+
+*62°17'12.2"N 25°49'38.7"E*
