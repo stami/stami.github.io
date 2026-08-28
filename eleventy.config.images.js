@@ -23,13 +23,10 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addAsyncShortcode(
     "image",
     async function imageShortcode(src, alt, widths, sizes) {
-      // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
-      // Warning: Avif can be resource-intensive so take care!
-      let formats = ["auto"];
       let file = relativeToInputPath(this.page.inputPath, src);
       let metadata = await eleventyImage(file, {
         widths: widths || ["auto"],
-        formats,
+        formats: ["webp"],
         outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
       });
 
@@ -48,7 +45,7 @@ module.exports = (eleventyConfig) => {
     let file = relativeToInputPath(inputPath || this.page.inputPath, src);
     let metadata = await eleventyImage(file, {
       widths: [320, 640, 960, 1600, "auto"],
-      formats: ["avif", "webp", "auto"],
+      formats: ["webp"],
       outputDir: path.join(eleventyConfig.dir.output, "img"),
     });
     let originalFormat = path.extname(file).slice(1).toLowerCase();
