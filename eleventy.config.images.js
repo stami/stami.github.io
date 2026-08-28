@@ -1,5 +1,5 @@
 const path = require("path");
-const eleventyImage = require("@11ty/eleventy-img");
+const eleventyImage = require("@11ty/eleventy-img").default;
 const { DateTime } = require("luxon");
 
 module.exports = (eleventyConfig) => {

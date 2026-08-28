@@ -8,7 +8,7 @@
 
 ## Toolchain
 
-- Use Node.js 20 to match `.github/workflows/static.yml`; `.tool-versions` selects the local LTS release.
+- Use Node.js 22 to match `.github/workflows/static.yml` and `.tool-versions`.
 - Use Yarn and the committed `yarn.lock`. Do not use npm or update the ignored `package-lock.json`.
 - Install dependencies with `yarn install --frozen-lockfile`.
 - Use CommonJS (`require` and `module.exports`) in JavaScript configuration files.
