@@ -3,7 +3,7 @@
 ## Project
 
 - Oaken is the static personal website at `https://oaken.fi/`.
-- The site uses Eleventy 2, Nunjucks, Markdown, Tailwind CSS 3, and PostCSS.
+- The site uses Eleventy 3, Nunjucks, Markdown, Tailwind CSS 4, and PostCSS.
 - Keep changes small and preserve the existing visual and editorial style unless the task explicitly requests a redesign or rewrite.
 
 ## Toolchain
@@ -46,7 +46,7 @@
 
 - Prefer Tailwind utility classes in Nunjucks and Markdown HTML.
 - Put site-wide element defaults in `public/css/_tailwind.css` and non-Tailwind shared styles in `public/css/index.css`.
-- When adding utility classes, ensure their source files remain covered by the `content` globs in `tailwind.config.js`.
+- When adding utility classes, ensure their source files remain covered by the `@source` declarations in `public/css/_tailwind.css`.
 - Preserve responsive behavior, dark-mode styles, semantic HTML, alt text, and visible keyboard focus.
 
 ## Validation And Deployment
