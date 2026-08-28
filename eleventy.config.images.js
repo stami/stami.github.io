@@ -69,7 +69,11 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addAsyncShortcode(
     "expandedPhotoPosts",
     async function expandedPhotoPostsShortcode(collection, limit) {
-      let posts = Array.from(collection).slice(-limit).reverse();
+      let posts = Array.from(collection);
+      if (limit) {
+        posts = posts.slice(-limit);
+      }
+      posts.reverse();
       let articles = [];
 
       for (let post of posts) {

@@ -10,8 +10,4 @@ eleventyNavigation:
 <p><a href="/species/">Species catalogue</a></p>
 
 {% include "photo-gallery-assets.njk" %}
-{% expandedPhotoPosts collections.photos, 5 %}
-
-{% if collections.photos.length > 5 %}
-<p><a href="/photos/all/">All photos</a></p>
-{% endif %}
+{% expandedPhotoPosts collections.photos %}
