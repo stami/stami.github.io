@@ -20,12 +20,13 @@ numberOfLatestPostsToShow: 5
 <h1>Apps</h1>
 {% include "appslist.njk" %}
 
-{% set postsCount = collections.posts | length %}
+{% set postsCount = collections.archive | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
 <h1>Latest Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
 
-{% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
+{% set postslist = collections.archive | head(-1 * numberOfLatestPostsToShow) %}
 {% set postslistCounter = postsCount %}
+{% set showPostType = true %}
 {% include "postslist.njk" %}
 
 {% set morePosts = postsCount - numberOfLatestPostsToShow %}

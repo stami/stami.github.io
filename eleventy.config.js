@@ -50,6 +50,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(pluginBundle);
 
+  eleventyConfig.addCollection("archive", (collectionApi) => {
+    return [
+      ...collectionApi.getFilteredByTag("posts"),
+      ...collectionApi.getFilteredByTag("photos"),
+    ].sort((first, second) => first.date - second.date);
+  });
+
   // Filters
   eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
@@ -92,8 +99,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
     return (tags || []).filter(
       (tag) =>
-        ["all", "nav", "photos", "post", "posts", "species"].indexOf(tag) ===
-        -1,
+        ["all", "archive", "nav", "photos", "post", "posts", "species"].indexOf(
+          tag,
+        ) === -1,
     );
   });
 
