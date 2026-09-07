@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunch Availability Forecast</title>
+  <meta name="description" content="Real-time Lunch Availability Forecast dial chart measuring Separatist vs Confirmed ALG lunch probabilities.">
+  <meta name="theme-color" content="#0b0f19">
+
+  <!-- Open Graph / Facebook / LinkedIn / Slack -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oaken.fi/misc/lunch-forecast/">
+  <meta property="og:title" content="Lunch Availability Forecast">
+  <meta property="og:description" content="Real-time Lunch Availability Forecast measuring Separatist vs Confirmed ALG lunch probabilities.">
+  <meta property="og:image" content="https://oaken.fi/misc/lunch-forecast/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Lunch Availability Forecast from Separatist lunch (0%) to Confirmed ALG lunch (100%)">
+  <meta property="og:site_name" content="Oaken">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://oaken.fi/misc/lunch-forecast/">
+  <meta name="twitter:title" content="Lunch Availability Forecast">
+  <meta name="twitter:description" content="Real-time Lunch Availability Forecast measuring Separatist vs Confirmed ALG lunch probabilities.">
+  <meta name="twitter:image" content="https://oaken.fi/misc/lunch-forecast/og-image.png">
+  <meta name="twitter:image:alt" content="Lunch Availability Forecast from Separatist lunch (0%) to Confirmed ALG lunch (100%)">
+
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 50% 20%, #172136 0%, #0b0f19 100%);
+      --card-bg: rgba(22, 30, 49, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --separatist-color: #f43f5e;
+      --alg-color: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: var(--bg-gradient);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .card {
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.25rem 2rem 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 50px -10px var(--accent-glow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.5s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .header-badge .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin-bottom: 1.75rem;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Dial Gauge Container */
+    .gauge-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gauge-svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .gauge-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 18;
+      stroke-linecap: round;
+    }
+
+    .gauge-progress {
+      fill: none;
+      stroke-width: 18;
+      stroke-linecap: round;
+      stroke-dasharray: 345.575;
+      stroke-dashoffset: 345.575;
+      transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gauge-tick {
+      stroke: rgba(255, 255, 255, 0.2);
+      stroke-width: 2;
+    }
+
+    .gauge-needle {
+      transform-origin: 160px 150px;
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .needle-body {
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+    }
+
+    .needle-center {
+      fill: #0f172a;
+      stroke: #ffffff;
+      stroke-width: 3.5;
+    }
+
+    .needle-pin {
+      fill: #10b981;
+      transition: fill 0.5s ease;
+    }
+
+    /* Dial labels */
+    .dial-extremes {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: -0.25rem;
+      margin-bottom: 1.25rem;
+      padding: 0 0.5rem;
+    }
+
+    .extreme-label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8125rem;
+      max-width: 44%;
+    }
+
+    .extreme-label.left {
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .extreme-label.right {
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .extreme-percent {
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .extreme-label.left .extreme-percent {
+      color: var(--separatist-color);
+    }
+
+    .extreme-label.right .extreme-percent {
+      color: var(--alg-color);
+    }
+
+    .extreme-text {
+      color: var(--text-muted);
+      font-size: 0.775rem;
+      line-height: 1.2;
+      margin-top: 0.15rem;
+    }
+
+    /* Value Display */
+    .value-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .probability-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .probability-number .symbol {
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: 0.15rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.4s ease;
+    }
+
+    /* Footnote */
+    .footnote-section {
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .footnote {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .footnote-name {
+      color: var(--text-main);
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* Discrete Edit Accordion */
+    .editor-accordion {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .editor-summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+      cursor: pointer;
+      user-select: none;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      background: transparent;
+      transition: color 0.2s ease, background 0.2s ease;
+      list-style: none;
+    }
+
+    .editor-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .editor-summary:hover {
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .editor-summary svg {
+      transition: transform 0.25s ease;
+    }
+
+    .editor-accordion[open] .editor-summary svg {
+      transform: rotate(90deg);
+    }
+
+    .editor-content {
+      width: 100%;
+      margin-top: 0.75rem;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Interactive quick adjuster & helper */
+    .controls-card {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .controls-row label {
+      font-weight: 500;
+      min-width: 75px;
+    }
+
+    .controls-row input[type="range"] {
+      flex: 1;
+      min-width: 120px;
+      accent-color: #10b981;
+      cursor: pointer;
+    }
+
+    .controls-row input[type="text"] {
+      flex: 1;
+      min-width: 120px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      color: var(--text-main);
+      font-size: 0.8125rem;
+    }
+
+    .controls-row input[type="text"]:focus {
+      outline: none;
+      border-color: #10b981;
+    }
+
+    .share-btn {
+      align-self: flex-end;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
+      color: var(--text-main);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.2s ease;
+    }
+
+    .share-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.75rem 1.25rem 1.5rem;
+        border-radius: 20px;
+      }
+      h1 {
+        font-size: 1.45rem;
+      }
+      .probability-number {
+        font-size: 3rem;
+      }
+      .dial-extremes {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" id="forecast-card">
+      <div class="header-badge">
+        <span class="pulse-dot"></span>
+        <span>Live Assessment</span>
+      </div>
+
+      <h1>Lunch Availability Forecast</h1>
+
+      <!-- Dial Chart -->
+      <div class="gauge-wrapper">
+        <svg class="gauge-svg" viewBox="0 0 320 180" aria-hidden="true">
+          <defs>
+            <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f43f5e" />
+              <stop offset="35%" stop-color="#fb923c" />
+              <stop offset="65%" stop-color="#fbbf24" />
+              <stop offset="100%" stop-color="#10b981" />
+            </linearGradient>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Background Track (180deg semicircle from x=50,y=150 to x=270,y=150, r=110) -->
+          <path class="gauge-track" d="M 50 150 A 110 110 0 0 1 270 150" />
+
+          <!-- Colored Gauge Progress Bar -->
+          <path
+            id="gauge-progress"
+            class="gauge-progress"
+            d="M 50 150 A 110 110 0 0 1 270 150"
+            stroke="url(#gaugeGradient)"
+          />
+
+          <!-- Tick Marks (0%, 25%, 50%, 75%, 100%) -->
+          <!-- 0%: angle 180deg (left) -->
+          <line class="gauge-tick" x1="42" y1="150" x2="58" y2="150" />
+          <!-- 25%: angle 135deg -->
+          <line class="gauge-tick" x1="76.5" y1="72.2" x2="87.8" y2="83.5" />
+          <!-- 50%: angle 90deg (top) -->
+          <line class="gauge-tick" x1="160" y1="32" x2="160" y2="48" />
+          <!-- 75%: angle 45deg -->
+          <line class="gauge-tick" x1="243.5" y1="72.2" x2="232.2" y2="83.5" />
+          <!-- 100%: angle 0deg (right) -->
+          <line class="gauge-tick" x1="262" y1="150" x2="278" y2="150" />
+
+          <!-- Needle -->
+          <g id="gauge-needle" class="gauge-needle" transform="rotate(-90 160 150)">
+            <!-- Needle pointer shape -->
+            <polygon class="needle-body" points="156,150 160,42 164,150" />
+            <!-- Needle center cap -->
+            <circle class="needle-center" cx="160" cy="150" r="14" />
+            <circle id="needle-pin" class="needle-pin" cx="160" cy="150" r="6" />
+          </g>
+        </svg>
+
+        <!-- Dial Extremes Labels -->
+        <div class="dial-extremes">
+          <div class="extreme-label left">
+            <span class="extreme-percent">0%</span>
+            <span class="extreme-text" id="reason-label">Separatist lunch</span>
+          </div>
+          <div class="extreme-label right">
+            <span class="extreme-percent">100%</span>
+            <span class="extreme-text">Confirmed ALG lunch</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Probability Number & Status -->
+      <div class="value-display">
+        <div class="probability-number">
+          <span id="prob-val">0</span><span class="symbol">%</span>
+        </div>
+        <div id="status-badge" class="status-badge">
+          <span id="status-icon">⚖️</span>
+          <span id="status-text">Calculating...</span>
+        </div>
+      </div>
+
+      <!-- Footnote -->
+      <div class="footnote-section">
+        <p class="footnote" id="footnote">Thank you for your attention to this matter.<span id="footnote-name" class="footnote-name"></span></p>
+      </div>
+    </div>
+
+    <!-- Discrete Edit Accordion -->
+    <details class="editor-accordion">
+      <summary class="editor-summary">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        <span>Edit</span>
+      </summary>
+      <div class="editor-content">
+        <div class="controls-card">
+          <div class="controls-row">
+            <label for="prob-slider">Probability:</label>
+            <input type="range" id="prob-slider" min="0" max="100" value="50" />
+            <span id="slider-val" style="min-width: 35px; text-align: right; font-weight: 600;">50%</span>
+          </div>
+          <div class="controls-row">
+            <label for="reason-input">Reason:</label>
+            <input type="text" id="reason-input" placeholder="Separatist lunch" />
+          </div>
+          <div class="controls-row">
+            <label for="name-input">Name:</label>
+            <input type="text" id="name-input" placeholder="e.g. Samuli" />
+            <button type="button" class="share-btn" id="copy-url-btn" title="Copy URL with current query parameters">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <script>
+    (function () {
+      const TOTAL_ARC_LENGTH = 345.575; // pi * 110
+      const DEFAULT_REASON = "Separatist lunch";
+
+      // DOM Elements
+      const gaugeProgress = document.getElementById("gauge-progress");
+      const gaugeNeedle = document.getElementById("gauge-needle");
+      const needlePin = document.getElementById("needle-pin");
+      const probVal = document.getElementById("prob-val");
+      const statusBadge = document.getElementById("status-badge");
+      const statusIcon = document.getElementById("status-icon");
+      const statusText = document.getElementById("status-text");
+      const reasonLabel = document.getElementById("reason-label");
+      const footnoteName = document.getElementById("footnote-name");
+      const probSlider = document.getElementById("prob-slider");
+      const sliderVal = document.getElementById("slider-val");
+      const reasonInput = document.getElementById("reason-input");
+      const nameInput = document.getElementById("name-input");
+      const copyUrlBtn = document.getElementById("copy-url-btn");
+      const forecastCard = document.getElementById("forecast-card");
+
+      // Parse query parameters
+      const urlParams = new URLSearchParams(window.location.search);
+
+      function parseProbabilityParam(raw) {
+        if (raw === null || raw === undefined || raw.trim() === "") {
+          return 50; // default value
+        }
+        let cleaned = raw.trim().replace(/%/g, "");
+        let num = parseFloat(cleaned);
+        if (isNaN(num)) return 50;
+        // If passed as decimal like 0.75 (and <= 1.0 while original had a dot)
+        if (num > 0 && num <= 1 && cleaned.includes(".")) {
+          num = num * 100;
+        }
+        return Math.max(0, Math.min(100, Math.round(num * 10) / 10));
+      }
+
+      function parseNameParam(raw) {
+        if (!raw) return "";
+        return raw.trim();
+      }
+
+      function parseReasonParam(raw) {
+        if (!raw || raw.trim() === "") return DEFAULT_REASON;
+        return raw.trim();
+      }
+
+      let currentProbability = parseProbabilityParam(urlParams.get("probability"));
+      let currentName = parseNameParam(urlParams.get("name"));
+      let currentReason = parseReasonParam(urlParams.get("reason"));
+
+      // Status tier descriptions
+      function getStatusTier(prob, reason) {
+        const displayReason = reason || DEFAULT_REASON;
+        if (prob <= 15) {
+          return {
+            icon: "🚨",
+            text: displayReason === DEFAULT_REASON ? "High Separatist Threat" : `High ${displayReason} Threat`,
+            color: "#f43f5e",
+            glow: "rgba(244, 63, 94, 0.25)"
+          };
+        } else if (prob <= 40) {
+          return {
+            icon: "🥪",
+            text: `${displayReason} likely`,
+            color: "#fb923c",
+            glow: "rgba(251, 146, 60, 0.2)"
+          };
+        } else if (prob <= 60) {
+          return {
+            icon: "⚖️",
+            text: "Uncertain / Split Caucus",
+            color: "#fbbf24",
+            glow: "rgba(251, 191, 36, 0.2)"
+          };
+        } else if (prob <= 85) {
+          return {
+            icon: "🥗",
+            text: "Strong ALG Momentum",
+            color: "#34d399",
+            glow: "rgba(52, 211, 153, 0.2)"
+          };
+        } else {
+          return {
+            icon: "🍲",
+            text: "Confirmed ALG lunch",
+            color: "#10b981",
+            glow: "rgba(16, 185, 129, 0.25)"
+          };
+        }
+      }
+
+      let animatedValue = 0;
+      let animationFrame = null;
+
+      function animateNumber(target) {
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        const start = animatedValue;
+        const startTime = performance.now();
+        const duration = 1200;
+
+        function update(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const ease = 1 - Math.pow(1 - progress, 3);
+          animatedValue = start + (target - start) * ease;
+          probVal.textContent = Math.round(animatedValue);
+
+          if (progress < 1) {
+            animationFrame = requestAnimationFrame(update);
+          } else {
+            animatedValue = target;
+            probVal.textContent = target % 1 === 0 ? target : target.toFixed(1);
+          }
+        }
+        animationFrame = requestAnimationFrame(update);
+      }
+
+      function render(probability, name, reason, animate = true) {
+        const effectiveReason = reason || DEFAULT_REASON;
+
+        // Needle angle: 0% -> -90deg (pointing left), 100% -> +90deg (pointing right)
+        const angle = (probability / 100) * 180 - 90;
+        gaugeNeedle.style.transform = `rotate(${angle}deg)`;
+
+        // Progress stroke offset
+        const offset = TOTAL_ARC_LENGTH * (1 - probability / 100);
+        gaugeProgress.style.strokeDashoffset = offset;
+
+        // Number animation or direct set
+        if (animate) {
+          animateNumber(probability);
+        } else {
+          animatedValue = probability;
+          probVal.textContent = probability % 1 === 0 ? probability : probability.toFixed(1);
+        }
+
+        // Status badge & glow
+        const tier = getStatusTier(probability, effectiveReason);
+        statusIcon.textContent = tier.icon;
+        statusText.textContent = tier.text;
+        statusBadge.style.color = tier.color;
+        statusBadge.style.borderColor = tier.color + "40";
+        needlePin.style.fill = tier.color;
+        forecastCard.style.setProperty("--accent-glow", tier.glow);
+
+        // Update 0% label
+        reasonLabel.textContent = effectiveReason;
+
+        // Footnote with sanitized name
+        if (name) {
+          footnoteName.textContent = ` ${name}`;
+        } else {
+          footnoteName.textContent = "";
+        }
+
+        // Update inputs
+        probSlider.value = Math.round(probability);
+        sliderVal.textContent = `${Math.round(probability)}%`;
+        if (document.activeElement !== reasonInput) {
+          reasonInput.value = effectiveReason === DEFAULT_REASON && !urlParams.has("reason") ? "" : (reason || "");
+        }
+        if (document.activeElement !== nameInput) {
+          nameInput.value = name;
+        }
+      }
+
+      // Initialize with animation
+      render(currentProbability, currentName, currentReason, true);
+
+      // Event Listeners for interactive controls
+      function updateUrlParams(prob, name, reason) {
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set("probability", prob);
+        if (name) {
+          newUrl.searchParams.set("name", name);
+        } else {
+          newUrl.searchParams.delete("name");
+        }
+        if (reason && reason.trim() !== "" && reason.trim() !== DEFAULT_REASON) {
+          newUrl.searchParams.set("reason", reason.trim());
+        } else {
+          newUrl.searchParams.delete("reason");
+        }
+        window.history.replaceState({}, "", newUrl.toString());
+      }
+
+      probSlider.addEventListener("input", function (e) {
+        currentProbability = parseFloat(e.target.value);
+        sliderVal.textContent = `${currentProbability}%`;
+        render(currentProbability, currentName, currentReason, false);
+        updateUrlParams(currentProbability, currentName, currentReason);
+      });
+
+      reasonInput.addEventListener("input", function (e) {
+        const val = e.target.value.trim();
+        currentReason = val === "" ? DEFAULT_REASON : val;
+        render(currentProbability, currentName, currentReason, false);
+        updateUrlParams(currentProbability, currentName, val);
+      });
+
+      nameInput.addEventListener("input", function (e) {
+        currentName = e.target.value.trim();
+        render(currentProbability, currentName, currentReason, false);
+        updateUrlParams(currentProbability, currentName, currentReason);
+      });
+
+      copyUrlBtn.addEventListener("click", function () {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(function () {
+          const originalHtml = copyUrlBtn.innerHTML;
+          copyUrlBtn.textContent = "Copied!";
+          setTimeout(function () {
+            copyUrlBtn.innerHTML = originalHtml;
+          }, 1800);
+        }).catch(function () {
+          alert("URL copied: " + url);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
+
