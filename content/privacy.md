@@ -4,7 +4,7 @@ layout: layouts/base.njk
 
 # Privacy Policy
 
-Updated 28.1.2023
+Updated 25.9.2026
 
 ---
 
@@ -25,6 +25,18 @@ The app does not embed any third party frameworks to collect analytics. Generic 
 ### What is collected
 
 If you enter your Nightscout url and access token in the app Settings, they are stored on your computer until you decide to remove the information in the app Settings.
+
+---
+
+## Valotin
+
+This privacy policy describes how **Valotin** (the app) handles your data.
+
+No data is collected. Photos you create with it are yours only.
+
+### Analytics
+
+The app does not embed any third party frameworks to collect analytics. Generic usage info is collected with [Apple's App Analytics](https://developer.apple.com/app-store/app-analytics/) if the user has opted in for it.
 
 ---
 
