@@ -13,3 +13,5 @@ photos:
       - harmaapaatikka
 ---
 Harmaapäätikka koiralenkillä havaittuna. Kannattaa välillä ottaa kamera selkään!
+
+*Kankaantie, Jyväskylä*
