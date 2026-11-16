@@ -11,6 +11,12 @@ photos:
   - image: harjalintu-3.jpg
     species:
       - harjalintu
+  - species:
+      - karppa
+    image: ka-rppa-1.jpg
+  - image: ka-rppa-2.jpg
+    species:
+      - karppa
 ---
 Sain vinkin harjalintuhavainnosta Jyväskylän Lohikoskella. Lähdin lounastauolla kurkkaamaan, josko se olisi vielä nähtävissä. Olihan se. Ja bonuksena kärppä!
 
